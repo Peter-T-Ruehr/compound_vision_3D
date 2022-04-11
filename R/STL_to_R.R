@@ -7,13 +7,20 @@
 #' @return A tibble containing triangle centers and triangle normals of STL file.
 #'
 #' @export
-#' @importFrom magrittr '%>%'
+#' @importFrom doParallel registerDoParallel stopImplicitCluster
 #' @importFrom dplyr filter pull select mutate arrange slice group_by ungroup left_join summarize distinct
 #' first lead lag case_when bind_cols tibble as_tibble desc progress_estimated bind_rows all_of rename n 
 #' mutate_all
-#' @importFrom rgl plot3d spheres3d selectpoints3d
+#' @importFrom foreach foreach '%dopar%'
+#' @importFrom magrittr '%>%'
+#' @importFrom geometry dot
+#' @importFrom graphics locator par abline hist
+#' @importFrom grDevices grey.colors
+#' @importFrom readr write_csv
+#' @importFrom reshape2 melt
+#' @importFrom rgl plot3d spheres3d selectpoints3d points3d text3d
 #' @importFrom tidyr separate
-#' @importFrom stats dist
+#' @importFrom stats dist hclust setNames cutree median
 #' @examples
 #' # xxx: add example
 #'
@@ -76,6 +83,8 @@ STL_2_tibble <- function(file_name){
   # # plot triangle center coordinates
   # plot3d(tri_centers_normals$x, tri_centers_normals$y, tri_centers_normals$z, aspect = "iso", col = "blue")
   
+  tri_centers_normals <- tri_centers_normals %>% 
+    ungroup()
   print("done!")
   return(tri_centers_normals)
 }

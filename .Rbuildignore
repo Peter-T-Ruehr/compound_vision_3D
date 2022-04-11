@@ -1,4 +1,10 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments\.md$
-\.R
+
+# misc
+^data/
+^data_raw/
+^README.html
+
+^1_import_and_clean_STLs.R
