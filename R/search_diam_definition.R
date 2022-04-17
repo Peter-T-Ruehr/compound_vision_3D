@@ -36,6 +36,7 @@ search_diam_interactive <- function(df){
     
     # start 3D selection
     print(paste0("Select two neighboring facet peaks. Then press the 'Esc' key."))
+    
     curr.selection <- selectpoints3d(ids["data"], value = FALSE,
                                      multiple = function(ids) {
                                        spheres3d(df[ids[, "index"], , drop = FALSE], color = "red",
@@ -48,14 +49,18 @@ search_diam_interactive <- function(df){
   # extract selection coordinates
   curr_selection_coords <- df[curr.selection[(nrow(curr.selection)-1):(nrow(curr.selection)), 2], ]
   
+  # calculate distance between points ~= facet diameter
+  dist_between_points <- as.numeric(dist(curr_selection_coords))
+  print(paste0("Facet diameter: ~", round(dist_between_points,2)))
+  
   # calculate search diameter ~ should be ~3 x facet size
-  search_diam <- dist(curr_selection_coords)*3
-  print(paste0("Search diameter: ", round(search_diam, 3)))
+  search_diam <- dist_between_points*3
+  print(paste0("Search diameter: ", round(search_diam, 2)))
   
   # plot vertex coordinates and search dimater sphere to check its size
   plot3d(df, aspect = "iso", col = "blue")
   spheres3d(df %>% select(x, y, z) %>% 
-              slice(n()/2),
+              slice(2*round(n()/4)),
             radius = search_diam/2, alpha = 0.9, aspect3d = "iso", col="red")
   
   print("done!")

@@ -16,6 +16,15 @@
 get_local_height <- function(df,
                              search_diam,
                              cores = 1){
+  
+  # # testing
+  # tri_centers_normals <- readr::read_csv("X:/Pub/2021/_Ruehr_AntVision/data/3_triangle_centers_and_normals//AV00001_Camponotus_hyatti_eye1_surface.csv",
+  #                                        show_col_types = FALSE)
+  # df = tri_centers_normals[1:100, ]
+  # search_diam = 55
+  # cores = 12
+  # #/ testing
+  
   # dplyr NULLs
   ID <- x <- y <- z <- value <- value.1 <- value.2 <- row_number <- norm.x <- 
     norm.y <- norm.z <- i <- search_diam_local_height <- local_height <- NULL
@@ -29,6 +38,7 @@ get_local_height <- function(df,
   start_time <- Sys.time()
   registerDoParallel(cores)
   
+  print("Starting analyses on cluster...")
   local_heights <- foreach(i = 1:nrow(df),
                            .combine=rbind, .packages=c('dplyr', 'geometry')) %dopar% {
                              
@@ -41,11 +51,11 @@ get_local_height <- function(df,
                              
                              curr.facets.df <- df %>%
                                dplyr::filter(x  >= curr.facet.x.y.z[1] - search_diam_local_height &
-                                        y  >= curr.facet.x.y.z[2] - search_diam_local_height &
-                                        z  >= curr.facet.x.y.z[3] - search_diam_local_height &
-                                        x  <= curr.facet.x.y.z[1] + search_diam_local_height &
-                                        y  <= curr.facet.x.y.z[2] + search_diam_local_height &
-                                        z  <= curr.facet.x.y.z[3] + search_diam_local_height )
+                                               y  >= curr.facet.x.y.z[2] - search_diam_local_height &
+                                               z  >= curr.facet.x.y.z[3] - search_diam_local_height &
+                                               x  <= curr.facet.x.y.z[1] + search_diam_local_height &
+                                               y  <= curr.facet.x.y.z[2] + search_diam_local_height &
+                                               z  <= curr.facet.x.y.z[3] + search_diam_local_height )
                              # print(nrow(curr.facets.df))
                              
                              # calculate current average facet normal
@@ -82,7 +92,7 @@ get_local_height <- function(df,
                            }
   
   stopImplicitCluster()
-  
+  print("Cluster analysis finished.")
   
   # add distances to local planes to df tibble
   df$local_height <- as.numeric(local_heights)
