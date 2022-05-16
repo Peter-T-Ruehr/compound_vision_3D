@@ -1,2 +1,4 @@
 # compound_vision_3D
-Code to analyze 3-dimenstional visual properties of compound eyes
+Code to extract 3D information of compound eyes and analyze their visual properties.
+
+This is still under development.
