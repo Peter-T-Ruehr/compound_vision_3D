@@ -13,8 +13,9 @@ species 2
 
 
 ### Field of view (FOV) and acuity
-![](https://live.staticflickr.com/65535/52076088442_1bff87d231_o.png)
-species 2
+![species 1](https://live.staticflickr.com/65535/52076088442_1bff87d231_o.png)
+species 1
 
 ### Interspecific variation: Facet size, inter-facet (IF) angle and sensitivity (P)
-![](https://live.staticflickr.com/65535/52077614450_71d1ecd3bc_o.png)
+![species 1-11](https://live.staticflickr.com/65535/52077614450_71d1ecd3bc_o.png)
+species 1-11
