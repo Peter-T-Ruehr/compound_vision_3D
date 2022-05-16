@@ -29,6 +29,9 @@ STL_2_tibble <- function(file_name){
   ID <- x <- y <- z <- value <- value.1 <- value.2 <- row_number <- norm.x <- 
     norm.y <- norm.z <- NULL
   
+  # xxx:
+  file_name <- "X:/Pub/2021/_Ruehr_AntVision/data/2_STLs/1_new/AV00001_Camponotus_hyatti_eye1_surface.stl"
+  
   # load STL file as lines
   print(paste0("Importing ", file_name, "..." ))
   file_in <- file(file_name, open = "r")
@@ -78,13 +81,36 @@ STL_2_tibble <- function(file_name){
     select(ID, norm.x, norm.y, norm.z)
   
   # join triangle center coordinates and their normals
-  tri_centers_normals <- left_join(vertex_coords_triangle_centers, normals, by = "ID")
+  tri_centers_normals <- left_join(vertex_coords_triangle_centers, normals, by = "ID") %>% 
+    ungroup()
   
   # # plot triangle center coordinates
-  # plot3d(tri_centers_normals$x, tri_centers_normals$y, tri_centers_normals$z, aspect = "iso", col = "blue")
+  plot3d(tri_centers_normals %>%
+           select(x,y,z), 
+         aspect = "iso", 
+         col = "blue")
+
+  # # draw vectors
+  # vec.mult <- 0.1
+  # for(curr_facet in round(seq(1, nrow(tri_centers_normals), length.out = 150))){ # nrow(curr_facets)
+  #   normal_vectors_df_subset <- tri_centers_normals %>%
+  #     filter(ID == curr_facet) %>%
+  #     select(norm.x, norm.y, norm.z)
+  #   curr_facet_coordinates <- tri_centers_normals %>%
+  #     filter(ID==curr_facet) %>%
+  #     select(x,y,z)
+  # 
+  #   # find mean point of normalized normal vector ends
+  #   norm.x <- normal_vectors_df_subset$norm.x
+  #   norm.y <- normal_vectors_df_subset$norm.y
+  #   norm.z <- normal_vectors_df_subset$norm.z
+  # 
+  #   lines3d(x = c(curr_facet_coordinates %>% pull(x), curr_facet_coordinates %>% pull(x) + norm.x*vec.mult),
+  #           y = c(curr_facet_coordinates %>% pull(y), curr_facet_coordinates %>% pull(y) + norm.y*vec.mult),
+  #           z = c(curr_facet_coordinates %>% pull(z), curr_facet_coordinates %>% pull(z) + norm.z*vec.mult),
+  #           col = "red")
+  # }
   
-  tri_centers_normals <- tri_centers_normals %>% 
-    ungroup()
   print("done!")
   return(tri_centers_normals)
 }
