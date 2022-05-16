@@ -1,5 +1,18 @@
 # compound_vision_3D
-Code to semi-automatically extract 3D information of compound eyes and analyze their visual properties.
+This repository contains
+* R pacckage to automatically extract and manually correct 3D information (number of facets, facet positions, inter-facet angles, sensitivity and acuity) of compound eye STLs.
+
+## Code available elsewhere (not yet published):
+* ImageJ macro language code to
+    * crop out the left and the right eye from a CT image stacks of various sources
+    * crop out head capsule and automatically scale down for landmarking if necessary
+* Python code to
+  * extract compund eye surface from head capsule STL in Blender
+* R code to 
+  * analyse the local topological differences of facet sizes and inter-facet angles
+  * calculate field of view (FOV) on local differences of acuity and sensitivity within FOV
+  * compare these values in an phylogenetic comparative framework
+  * analyse the trade-off between acuity and sensitivity across species
 
 This is an alpha-version and still under development.
 
