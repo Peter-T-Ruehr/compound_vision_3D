@@ -9,9 +9,9 @@ This repository contains
     * crop out head capsule and automatically scale down for landmarking if necessary
     * automatically generate surface STLs of compund eyes
 * `Python`
-  * extract compund eye surface from STLs in Blender
+  * extract compound eye surface from STLs in Blender
 * `R`
-  * import compund eye STL to R
+  * import compound eye STL to R
   * extract 
   * analyse the local topological differences of facet sizes and inter-facet angles
   * calculate field of view (FOV) on local differences of acuity and sensitivity within FOV
