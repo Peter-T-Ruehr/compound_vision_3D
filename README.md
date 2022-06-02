@@ -22,6 +22,8 @@ This is an alpha-version and still under development.
 
 ## Example output
 ### Direction and acuity
+![species 2](https://live.staticflickr.com/65535/52076138677_8fb88204ae_o.gif)
+=======
 <img src="https://live.staticflickr.com/65535/52077372779_5dafd04018_o.gif" alt="species 1" width="600"/>
 
 species 1
